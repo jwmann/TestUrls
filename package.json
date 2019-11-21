@@ -1,6 +1,6 @@
 {
   "name": "testurls",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A CLI utility to parse a CSV file and test URLs whether they're valid links that return a valid server response",
   "repository": {
     "type": "git",
