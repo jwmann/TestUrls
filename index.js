@@ -103,28 +103,24 @@ if (process.argv.length > 2) {
               const testURL =
                 regex && substring ? url.replace(regex, substring) : url;
 
-              requestURL(url, function(error, response) {
-                if (debug) console.log({ requesting: url });
+              requestURL(testURL, (error, response) => {
+                const requested = {
+                  source: url,
+                  requested: testURL,
+                };
                 if (!error) {
                   const statusCode = response && response.statusCode;
-                  if (statusCode !== 200) {
-                    problematicURLs.push({
-                      source: url,
-                      requested: testURL,
-                      response: statusCode,
-                    });
-                  }
+                  requested.response = statusCode;
+                  if (statusCode !== 200) problematicURLs.push(requested);
                 } else {
-                  problematicURLs.push({
-                    source: url,
-                    requested: testURL,
-                    response: 'Error',
-                  });
+                  requested.response = 'Error';
+                  problematicURLs.push(requested);
                   if (debug) {
-                    console.error(`Error processing URL: '${url}'`);
+                    console.error(`Error processing URL: '${testURL}'`);
                     console.error(error);
                   }
                 }
+                if (debug) console.log('Requested: ', requested);
               });
             } else {
               console.error(
