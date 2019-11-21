@@ -37,6 +37,19 @@ Example:
 $ node ./testURLs/ ./MyURLs.csv WebsiteURL www dev 5 2000
 ```
 
+RegEx Example:
+
+```
+$ node ./testURLs/ ./MyURLs.csv WebsiteURL 'www\..+\.\w+/?' sub.domain.com/ 5 2000
+```
+
+This example will replace all website domains to instead request a particular domain / sub-domain.
+
+```
+https://www.google.ca -> https://sub.domain.com/
+https://www.github.com/jwmann/ -> https://sub.domain.com/jwmann/
+```
+
 ## Output
 
 If the script ran successfully and there are any URLs that were problematic, a CSV file will be outputted to the directory that you run the CLI utility from.
