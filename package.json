@@ -1,0 +1,16 @@
+{
+  "name": "testurls",
+  "version": "0.1.0",
+  "description": "A CLI utility to parse a CSV file and test URLs whether they're valid links that return a valid server response",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James W Mann",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^2.3.2",
+    "csv-writer": "^1.5.0",
+    "request": "^2.88.0"
+  }
+}
