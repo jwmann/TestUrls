@@ -16,14 +16,14 @@ $ npm install
 
 ## CLI Arguments
 
-# | Description | Expected Type | Default | Required
-- | ----------- | ------------- | ------- | --------
-1 | The Path to the CSV that contains the URLs you want to test | `string` | `''` | `true`
-2 | The column name within the CSV that contains your URLs | `string` | `url` | `false`
-3 | A JavaScript based Regular Expression to be used on each URL | `string` | `''` | `false`
-4 | Text that will be used to replace if found by the RegEx | `string` | `''` | `false`
-5 | The Maximum amount of simultaneous URL requests/tests made at a time | `number` | `5` | `false`
-6 | The Amount of Milliseconds to wait in between Requests if the maximum has been reached | `number` | `1000` | `false`
+|   # | Description                                                                            | Expected Type | Default | Required |
+| --: | -------------------------------------------------------------------------------------- | ------------- | ------- | -------- |
+|   1 | The Path to the CSV that contains the URLs you want to test                            | `string`      | `''`    | `true`   |
+|   2 | The column name within the CSV that contains your URLs                                 | `string`      | `url`   | `false`  |
+|   3 | A JavaScript based Regular Expression to be used on each URL                           | `string`      | `''`    | `false`  |
+|   4 | Text that will be used to replace if found by the RegEx                                | `string`      | `''`    | `false`  |
+|   5 | The Maximum amount of simultaneous URL requests/tests made at a time                   | `number`      | `5`     | `false`  |
+|   6 | The Amount of Milliseconds to wait in between Requests if the maximum has been reached | `number`      | `1000`  | `false`  |
 
 ## Usage
 
