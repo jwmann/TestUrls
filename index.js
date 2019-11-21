@@ -89,7 +89,8 @@ if (process.argv.length > 2) {
     substring = '',
   ] = process.argv;
   const sourcePath = path.resolve(source);
-  if (debug) console.log({ sourcePath, column, regex, substring });
+  if (debug)
+    console.log({ sourcePath, column, regex: new RegExp(regex), substring });
 
   if (source && sourcePath && isFile(sourcePath)) {
     if (isCSV(sourcePath)) {
@@ -101,7 +102,9 @@ if (process.argv.length > 2) {
             const { [column]: url } = row;
             if (url !== undefined) {
               const testURL =
-                regex && substring ? url.replace(regex, substring) : url;
+                regex && substring
+                  ? url.replace(new RegExp(regex), substring)
+                  : url;
 
               requestURL(testURL, (error, response) => {
                 const requested = {
