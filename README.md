@@ -34,5 +34,19 @@ Use the arguments table above to learn what each argument does.
 Example:
 
 ```
-$ node ./testURLs/ ./MyURLS.csv WebsiteURL www dev 5 2000
+$ node ./testURLs/ ./MyURLs.csv WebsiteURL www dev 5 2000
 ```
+
+## Output
+
+If the script ran successfully and there are any URLs that were problematic, a CSV file will be outputted to the directory that you run the CLI utility from.
+
+```
+$ pwd
+/Users/me/Desktop
+
+$ node ./testURLs/ ./MyURLs.csv
+/Users/me/Desktop/urls.csv
+```
+
+If there are no problematic URLs, then the script will exit successfully and no file will be generated.
