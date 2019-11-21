@@ -2,6 +2,10 @@
   "name": "testurls",
   "version": "0.1.0",
   "description": "A CLI utility to parse a CSV file and test URLs whether they're valid links that return a valid server response",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jwmann/TestUrls"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
