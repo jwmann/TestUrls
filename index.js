@@ -24,9 +24,18 @@ const isFile = path =>
   fs.lstatSync(path).isFile();
 const isCSV = path => typeof path === 'string' && path.match(/\.csv$/i);
 
-function writeCSV() {
+function writeCSV(sourcePath) {
   if (problematicURLs.length) {
-    const outputFilename = 'urls.csv';
+    let filename = '';
+    if (sourcePath) {
+      const extension = path.extname(sourcePath);
+      filename = path.basename(sourcePath, extension);
+    }
+
+    const defaultOutputFilename = 'problematic-urls.csv';
+    const outputFilename = filename
+      ? `${filename}-${defaultOutputFilename}`
+      : defaultOutputFilename;
     const csvWriter = createCsvWriter({
       path: outputFilename,
       header: [
@@ -47,8 +56,8 @@ function writeCSV() {
       }
     });
   } else {
-    process.exit(0);
     console.log('All URLs responded succesfully!');
+    process.exit(0);
   }
 }
 
@@ -81,12 +90,12 @@ function requestURL(url = '', callback = (error, response, body) => {}) {
     );
 }
 
-function writeWhenReady() {
+function writeWhenReady(sourcePath) {
   Promise.all(requestQueue).then(() => {
     progressBar.stop();
     console.log('All URL tests complete!');
     if (debug) console.log(JSON.stringify(problematicURLs, null, 2));
-    writeCSV();
+    writeCSV(sourcePath);
   });
 }
 
@@ -146,7 +155,7 @@ if (process.argv.length > 2) {
         }
         if (debug) console.log('CSV file successfully processed.');
         progressBar.start(requestQueue.length, 0);
-        writeWhenReady();
+        writeWhenReady(sourcePath);
       })();
     } else {
       console.error(
