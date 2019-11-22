@@ -13,6 +13,7 @@
   "author": "James W Mann",
   "license": "ISC",
   "dependencies": {
+    "cli-progress": "^3.4.0",
     "csv-parser": "^2.3.2",
     "csv-writer": "^1.5.0",
     "request": "^2.88.0"

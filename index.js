@@ -4,6 +4,7 @@ const path = require('path');
 const csv = require('csv-parser');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const request = require('request');
+const cliProgress = require('cli-progress');
 
 const debug = false;
 const problematicURLs = [];
@@ -11,6 +12,11 @@ const requestQueue = [];
 const maxRequests = ~~process.argv[6] || 5;
 const timeout = ~~process.argv[7] || 1000;
 let currentRequests = 0;
+let completeRequests = 0;
+const progressBar = new cliProgress.SingleBar(
+  {},
+  cliProgress.Presets.shades_classic
+);
 
 const isFile = path =>
   typeof path === 'string' &&
@@ -67,12 +73,17 @@ function requestURL(url = '', callback = (error, response, body) => {}) {
           }
         };
         requestWhenReady();
-      }).then(() => currentRequests--)
+      }).then(() => {
+        currentRequests--;
+        completeRequests++;
+        progressBar.update(completeRequests);
+      })
     );
 }
 
 function writeWhenReady() {
   Promise.all(requestQueue).then(() => {
+    progressBar.stop();
     console.log('All URL tests complete!');
     if (debug) console.log(JSON.stringify(problematicURLs, null, 2));
     writeCSV();
@@ -134,6 +145,7 @@ if (process.argv.length > 2) {
           }
         }
         if (debug) console.log('CSV file successfully processed.');
+        progressBar.start(requestQueue.length, 0);
         writeWhenReady();
       })();
     } else {
